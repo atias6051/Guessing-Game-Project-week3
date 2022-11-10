@@ -30,12 +30,14 @@ const checkGuess = num => {
 
 const askGuess = () => {
     rl.question(`Enter a guess: `, (guess) => {
-        if(!checkGuess(Number(guess)) && numAttempts>0){
-            askGuess();
-        }else if(checkGuess(Number(guess))){
-            rl.close();
+        if(!checkGuess(Number(guess))){
+            if(numAttempts===0){
+                console.log("Sorry, you are out off guesses. Try again next time!")
+                rl.close();
+            }else{
+                askGuess();
+            }
         }else{
-            console.log("Sorry, you are out off guesses. Try again next time!")
             rl.close();
         }
     })
