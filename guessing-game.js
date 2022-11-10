@@ -8,7 +8,7 @@ const rl = readLine.createInterface({
 });
 
 let secretNumber;
-let numAttempts = 5;
+let numAttempts;
 function randomInRange(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
@@ -57,5 +57,12 @@ const maxHandler = max =>{
 const askRange = () =>{
     rl.question(`Enter a max number: `, maxHandler);
 }
+
+const askLimit = () => {
+    rl.question(`How many attempts do you need? `, num => {
+        numAttempts = num;
+        askRange();
+    })
+}
 // askGuess();
-askRange();
+askLimit();
