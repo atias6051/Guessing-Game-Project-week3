@@ -1,10 +1,10 @@
-const readLine = require(`readline`);
+// const readLine = require(`readline`);
 
 
-const rl = readLine.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// const rl = readLine.createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+// });
 
 
 const afterQ = (answer)=>{
@@ -19,3 +19,16 @@ const afterQ1 = (answer)=>{
 };
 
 rl.question(`How are you? `,afterQ1);
+
+// console.log(Math.floor(Math.random()*100))
+// console.log(Math.floor(Math.random()*100))
+// console.log(Math.random())
+// console.log(Math.random())
+
+function randomInRange(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+console.log(getR(5,26));
+console.log(getR(5,26));
+console.log(getR(5,26));

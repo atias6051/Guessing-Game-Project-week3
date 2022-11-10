@@ -6,45 +6,53 @@ const rl = readLine.createInterface({
     output: process.stdout
 });
 
-let secretNumber = 5;
+let secretNumber;
+let numAttempts = 5;
+function randomInRange(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
 
 const checkGuess = num => {
     if(num>secretNumber){
         console.log(`Too high.`);
+        numAttempts--;
         return false;
     }else if(num<secretNumber){
         console.log(`Too low`)
+        numAttempts--;
         return false;
     }else{
         console.log(`Correct`)
         return true;
     }
 }
-// const checkGuess = num => {
-//     if(num>secretNumber){
-//         console.log(`Too high.`);
-//         return false;
-//     }else if(num<secretNumber){
-//         console.log(`Too low`)
-//         return false;
-//     }else{
-//         console.log(`Correct`)
-//         return true;
-//     }
-// }
+
 const askGuess = () => {
     rl.question(`Enter a guess: `, (guess) => {
-        if(!checkGuess(Number(guess))){
+        if(!checkGuess(Number(guess)) && numAttempts>0){
             askGuess();
+        }else if(checkGuess(Number(guess))){
+            rl.close();
         }else{
+            console.log("Sorry, you are out off guesses. Try again next time!")
             rl.close();
         }
     })
 }
-
-// console.log(readLine);
-// console.log(checkGuess(4));
-// console.log(checkGuess(2));
-// console.log(checkGuess(15));
-
-askGuess();
+let userMin;
+let userMax;
+const minHandler = min =>{
+    userMin = min;
+    secretNumber = randomInRange(userMin,userMax)
+    console.log(`I'm thinking of a number between ${userMin} and ${userMax}`);
+    askGuess();
+}
+const maxHandler = max =>{
+    userMax = max;
+    rl.question(`Enter a min number: `, minHandler);
+}
+const askRange = () =>{
+    rl.question(`Enter a max number: `, maxHandler);
+}
+// askGuess();
+askRange();
